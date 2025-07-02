@@ -51,7 +51,7 @@ echo "✅ Resolved IP: $IP"
 
 # 4️⃣ Blacklist Check (AbuseIPDB)
 echo "🚨 [4] Checking Blacklists (AbuseIPDB)..."
-ABUSE_CHECK=$(curl -s "https://api.abuseipdb.com/api/v2/check?ip=$IP" -H "Key:febfcc3156c6ecf6709ccdbe957a1ed841bc246a98c7fab235e356d5bfcbfd1f687bc674f8d59e21" | jq .)
+ABUSE_CHECK=$(curl -s "https://api.abuseipdb.com/api/v2/check?ip=$IP" -H "Key:"Your API"" | jq .)
 
 if [[ "$ABUSE_CHECK" == *'"abuseConfidenceScore":'* ]]; then
   ABUSE_SCORE=$(echo "$ABUSE_CHECK" | jq '.data.abuseConfidenceScore')
@@ -89,7 +89,7 @@ else
       "languages": ["en"],
       "requestedAttributes": {"TOXICITY": {}}
     }' \
-    "https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze?key=AIzaSyBqc8wYqbtAd03P6SAE5Zr2PFiiTskxsNo")
+    "Your API
 
   TOXICITY_SCORE=$(echo "$PERSPECTIVE_RESPONSE" | jq '.attributeScores.TOXICITY.summaryScore.value')
 
@@ -340,7 +340,7 @@ rm -f batch_check.log
 
 echo " 🔐 [24] Checking if the website is using any known VPN servers"
 API_KEY="a56afb251b090e"
-VPN_CHECK=$(curl -s "https://ipinfo.io/$WEBSITE_IP/json?token=a56afb251b090e" | grep -i 'vpn')
+VPN_CHECK=$(curl -s "https://ipinfo.io/$WEBSITE_IP/json?token=?" | grep -i 'vpn')
 
 if [ -n "$VPN_CHECK" ]; then
     echo "⚠️ Website is behind a VPN or proxy!"
